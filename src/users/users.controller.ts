@@ -7,6 +7,8 @@ import {
   Put,
   Delete,
   UseGuards,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './users.entity';
@@ -28,6 +30,13 @@ export class UsersController {
 
   @Post()
   async Create(@Body() user: User): Promise<User> {
+    const isExist = await this.usersService.findOneByEmail(user.email);
+    if (isExist) {
+      throw new HttpException(
+        'Cette ressource existe déjà',
+        HttpStatus.CONFLICT,
+      );
+    }
     return this.usersService.create(user);
   }
 

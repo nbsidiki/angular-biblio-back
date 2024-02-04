@@ -18,6 +18,10 @@ export class LivreService {
     return this.livresRepository.findOneBy({ id });
   }
 
+  async findByTitle(title: string): Promise<Livre | null> {
+    return this.livresRepository.findOneBy({ title });
+  }
+
   async create(livreData: Partial<Livre>): Promise<Livre> {
     const livre = this.livresRepository.create(livreData);
     return this.livresRepository.save(livre);
