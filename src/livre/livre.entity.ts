@@ -22,14 +22,15 @@ export class Livre {
   contenu: string;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  dateCreation: Date;
+  createdAt: Date;
 
   @Column({
     type: 'timestamp',
     default: () => 'CURRENT_TIMESTAMP',
     onUpdate: 'CURRENT_TIMESTAMP',
   })
-  dateModification: Date;
+  updatedAt: Date;
+
   @OneToMany(() => Page, (page) => page.livre, { cascade: true })
   pages: Page[];
 
