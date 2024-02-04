@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 import { Page } from '../pages/pages.entity';
 import { Category } from 'src/categories/categories.entity';
+import { User } from 'src/users/users.entity';
 @Entity()
 export class Livre {
   @PrimaryGeneratedColumn()
@@ -16,8 +17,9 @@ export class Livre {
   @Column()
   titre: string;
 
-  @Column()
-  auteur: string;
+  @ManyToOne(() => User, (user) => user.livres, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'authorId' })
+  author: User;
 
   @Column({ nullable: true })
   contenu: string;

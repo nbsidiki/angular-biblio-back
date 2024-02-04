@@ -9,6 +9,8 @@ import {
 } from '@nestjs/common';
 import { LivreService } from './livre.service';
 import { Livre } from './livre.entity';
+import { Roles } from 'src/roles/roles.decorator';
+import { Role } from 'src/roles/roles.enum';
 
 @Controller('livres')
 export class LivreController {
@@ -25,6 +27,7 @@ export class LivreController {
   }
 
   @Put(':id')
+  @Roles(Role.Author)
   async updateLivre(
     @Param('id') id: number,
     @Body() livre: Livre,
@@ -33,6 +36,7 @@ export class LivreController {
   }
 
   @Delete(':id')
+  @Roles(Role.Author)
   async deleteLivre(@Param('id') id: number): Promise<void> {
     return this.livreService.remove(id);
   }

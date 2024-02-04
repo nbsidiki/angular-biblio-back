@@ -1,4 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Livre } from 'src/livre/livre.entity';
+import { Role } from 'src/roles/roles.enum';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity()
 export class User {
@@ -19,6 +21,12 @@ export class User {
 
   @Column()
   roles: string;
+
+  @OneToMany(() => Livre, (livre) => livre.author, {
+    cascade: true,
+    nullable: true,
+  })
+  livres: Livre[];
 
   @Column({ default: true })
   isActive: boolean;
