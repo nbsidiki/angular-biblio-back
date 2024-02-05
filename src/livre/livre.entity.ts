@@ -22,7 +22,7 @@ export class Livre {
   author: User;
 
   @Column({ nullable: true })
-  contenu: string;
+  resume: string;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;

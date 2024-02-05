@@ -22,6 +22,16 @@ export class User {
   @Column()
   roles: string;
 
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  createdAt: Date;
+
+  @Column({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP',
+    onUpdate: 'CURRENT_TIMESTAMP',
+  })
+  updatedAt: Date;
+
   @OneToMany(() => Livre, (livre) => livre.author, {
     cascade: true,
     nullable: true,

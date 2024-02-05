@@ -7,7 +7,17 @@ export class Category {
   id: number;
 
   @Column()
-  name: string;
+  label: string;
+
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  createdAt: Date;
+
+  @Column({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP',
+    onUpdate: 'CURRENT_TIMESTAMP',
+  })
+  updatedAt: Date;
 
   @OneToMany(() => Livre, (livre) => livre.category)
   livres: Livre[];

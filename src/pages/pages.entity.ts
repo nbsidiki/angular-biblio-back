@@ -13,10 +13,20 @@ export class Page {
   id: number;
 
   @Column()
-  titre: string;
+  title: string;
 
   @Column({ nullable: true })
   contenu: string;
+
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  createdAt: Date;
+
+  @Column({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP',
+    onUpdate: 'CURRENT_TIMESTAMP',
+  })
+  updatedAt: Date;
 
   @ManyToOne(() => Livre, (livre) => livre.pages, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'livreId' })
