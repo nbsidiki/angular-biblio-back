@@ -39,14 +39,12 @@ export class PagesController {
 
   @Put(':id')
   @UseGuards(AuthGuard)
-  @Roles(Role.Author)
   async updatePage(@Param('id') id: number, @Body() page: Page): Promise<Page> {
     return this.pageService.update(id, page);
   }
 
   @Delete(':id')
   @UseGuards(AuthGuard)
-  @Roles(Role.Author)
   async deletePage(@Param('id') id: number): Promise<void> {
     return this.pageService.remove(id);
   }

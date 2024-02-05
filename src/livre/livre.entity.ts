@@ -5,6 +5,8 @@ import {
   OneToMany,
   ManyToOne,
   JoinColumn,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 import { Page } from '../pages/pages.entity';
 import { Category } from 'src/categories/categories.entity';
@@ -24,6 +26,9 @@ export class Livre {
   @Column({ nullable: true })
   resume: string;
 
+  @Column({ type: 'longblob', nullable: true })
+  image: Buffer;
+
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 
@@ -40,7 +45,7 @@ export class Livre {
   })
   pages: Page[];
 
-  @ManyToOne(() => Category, (category) => category.livres, { nullable: true })
-  @JoinColumn({ name: 'categoryId' })
-  category: Category;
+  @ManyToMany(() => Category)
+  @JoinTable()
+  category: Category[];
 }

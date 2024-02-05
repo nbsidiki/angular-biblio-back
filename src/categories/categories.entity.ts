@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
 import { Livre } from '../livre/livre.entity';
 
 @Entity()
@@ -19,6 +26,7 @@ export class Category {
   })
   updatedAt: Date;
 
-  @OneToMany(() => Livre, (livre) => livre.category)
+  @ManyToMany(() => Livre)
+  @JoinTable()
   livres: Livre[];
 }

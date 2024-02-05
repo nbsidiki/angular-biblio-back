@@ -31,10 +31,15 @@ export class LivreController {
   async getLivre(@Param('id') id: number): Promise<Livre> {
     return this.livreService.findOne(id);
   }
+  @Get(':title')
+  @UseGuards(AuthGuard)
+  async getLivreByTitle(@Param('title') id: number): Promise<Livre> {
+    return this.livreService.findOne(id);
+  }
 
   @Post()
   @UseGuards(AuthGuard)
-  @Roles(Role.Author)
+  @Roles(Role.Admin)
   async addLivre(@Body() livre: Livre): Promise<Livre> {
     const existingLivre = await this.livreService.findByTitle(livre.title);
     if (existingLivre) {
@@ -48,7 +53,7 @@ export class LivreController {
 
   @Put(':id')
   @UseGuards(AuthGuard)
-  @Roles(Role.Author)
+  @Roles(Role.Admin)
   async updateLivre(
     @Param('id') id: number,
     @Body() livre: Livre,
