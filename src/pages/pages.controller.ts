@@ -13,10 +13,15 @@ import { Page } from './pages.entity';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { Role } from 'src/roles/roles.enum';
 import { Roles } from 'src/roles/roles.decorator';
+import { LivreService } from 'src/livre/livre.service';
+import { Livre } from 'src/livre/livre.entity';
 
 @Controller('pages')
 export class PagesController {
-  constructor(private pageService: PagesService) {}
+  constructor(
+    private pageService: PagesService,
+    private livreService: LivreService,
+  ) {}
 
   @Get()
   @UseGuards(AuthGuard)
@@ -30,9 +35,15 @@ export class PagesController {
     return this.pageService.findOne(id);
   }
 
+  @Get('number/:id')
+  @UseGuards(AuthGuard)
+  async getPageNumber(@Param('id') id: number): Promise<number> {
+    const livre = await this.livreService.findOne(id);
+    return this.pageService.findPageNumber(livre);
+  }
+
   @Post()
   @UseGuards(AuthGuard)
-  @Roles(Role.Author)
   async addPage(@Body() page: Page): Promise<Page> {
     return this.pageService.create(page);
   }
@@ -45,6 +56,7 @@ export class PagesController {
 
   @Delete(':id')
   @UseGuards(AuthGuard)
+  @Roles(Role.Admin)
   async deletePage(@Param('id') id: number): Promise<void> {
     return this.pageService.remove(id);
   }
