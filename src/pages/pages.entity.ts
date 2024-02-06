@@ -6,6 +6,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { Livre } from '../livre/livre.entity';
+import { Chapter } from 'src/chapters/chapters.entity';
 
 @Entity()
 export class Page {
@@ -17,6 +18,9 @@ export class Page {
 
   @Column({ nullable: true })
   contenu: string;
+
+  @Column({ nullable: true })
+  pageNumber: number;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
@@ -31,4 +35,8 @@ export class Page {
   @ManyToOne(() => Livre, (livre) => livre.pages, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'livreId' })
   livre: Livre;
+
+  @ManyToOne(() => Chapter, (chapter) => chapter.pages, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'chapterId' })
+  chapter: Chapter;
 }

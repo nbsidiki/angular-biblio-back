@@ -11,6 +11,7 @@ import {
 import { Page } from '../pages/pages.entity';
 import { Category } from 'src/categories/categories.entity';
 import { User } from 'src/users/users.entity';
+import { Chapter } from 'src/chapters/chapters.entity';
 @Entity()
 export class Livre {
   @PrimaryGeneratedColumn()
@@ -44,6 +45,12 @@ export class Livre {
     nullable: true,
   })
   pages: Page[];
+
+  @OneToMany(() => Chapter, (chapter) => chapter.livre, {
+    cascade: true,
+    nullable: true,
+  })
+  chapters: Chapter[];
 
   @ManyToMany(() => Category)
   @JoinTable()

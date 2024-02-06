@@ -13,6 +13,7 @@ import { PagesController } from './pages/pages.controller';
 import { PagesModule } from './pages/pages.module';
 import { CategoriesModule } from './categories/categories.module';
 import { AuthMiddleware } from './auth/auth.middleware';
+import { ChaptersModule } from './chapters/chapters.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { AuthMiddleware } from './auth/auth.middleware';
     }),
     PagesModule,
     CategoriesModule,
+    ChaptersModule,
   ],
   controllers: [AppController, PagesController],
   providers: [AppService, LivreService, PagesService],
