@@ -24,11 +24,11 @@ export class Livre {
   @JoinColumn({ name: 'authorId' })
   author: User;
 
-  @Column({ nullable: true })
+  @Column({ type: 'text', nullable: true })
   resume: string;
 
-  @Column({ type: 'longblob', nullable: true })
-  image: Buffer;
+  @Column({ type: 'text', nullable: true })
+  image: string;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;

@@ -14,6 +14,7 @@ import { PagesModule } from './pages/pages.module';
 import { CategoriesModule } from './categories/categories.module';
 import { AuthMiddleware } from './auth/auth.middleware';
 import { ChaptersModule } from './chapters/chapters.module';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
@@ -34,6 +35,9 @@ import { ChaptersModule } from './chapters/chapters.module';
     PagesModule,
     CategoriesModule,
     ChaptersModule,
+    MulterModule.register({
+      dest: './images', // Répertoire de stockage des fichiers téléchargés
+    }),
   ],
   controllers: [AppController, PagesController],
   providers: [AppService, LivreService, PagesService],
