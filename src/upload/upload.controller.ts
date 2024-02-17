@@ -15,7 +15,7 @@ export class UploadController {
   @UseInterceptors(
     FileInterceptor('file', {
       storage: diskStorage({
-        destination: '../../images', // Répertoire où enregistrer les fichiers
+        destination: path.join(__dirname, '..', '..', 'images'), // Répertoire où enregistrer les fichiers
         filename: (req, file, cb) => {
           const filename = `${Date.now()}${path.extname(file.originalname)}`;
           cb(null, filename);
