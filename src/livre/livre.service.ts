@@ -15,19 +15,30 @@ export class LivreService {
   ) {}
 
   async findAll(): Promise<Livre[]> {
-    return this.livresRepository.find();
+    return this.livresRepository.find({
+      relations: ['author', 'pages', 'chapters', 'category'],
+    });
   }
 
   async findOne(id: number): Promise<Livre | null> {
-    return this.livresRepository.findOneBy({ id });
+    return this.livresRepository.findOne({
+      where: { id },
+      relations: ['author', 'pages', 'chapters', 'category'],
+    });
   }
 
   async findByTitle(title: string): Promise<Livre | null> {
-    return this.livresRepository.findOneBy({ title });
+    return this.livresRepository.findOne({
+      where: { title },
+      relations: ['author', 'pages', 'chapters', 'category'],
+    });
   }
 
   async findByUser(author: any): Promise<Livre[] | null> {
-    return this.livresRepository.findBy({ author });
+    return this.livresRepository.find({
+      where: { author },
+      relations: ['author', 'pages', 'chapters', 'category'],
+    });
   }
 
   async create(livreData: Partial<Livre>, userId: any): Promise<Livre> {
