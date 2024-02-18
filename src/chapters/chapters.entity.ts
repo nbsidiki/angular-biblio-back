@@ -34,6 +34,10 @@ export class Chapter {
   @JoinColumn({ name: 'livreId' })
   livre: Livre;
 
-  @OneToMany(() => Page, (page) => page.chapter)
+  @OneToMany(() => Page, (page) => page.chapter, {
+    cascade: true,
+    nullable: true,
+    eager: true,
+  })
   pages: Page[];
 }
