@@ -13,7 +13,7 @@ export class Page {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ nullable: true })
+  @Column({ type: 'text', nullable: true })
   contenu: string;
 
   @Column({ nullable: true })
