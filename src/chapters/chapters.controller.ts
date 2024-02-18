@@ -26,14 +26,14 @@ export class ChaptersController {
 
   @Post()
   @UseGuards(AuthGuard)
-  @Roles(Role.Admin)
+  @Roles(Role.Author)
   async addChapter(@Body() Chapter: Chapter): Promise<Chapter> {
     return this.chapterService.create(Chapter);
   }
 
   @Put(':id')
   @UseGuards(AuthGuard)
-  @Roles(Role.Admin)
+  @Roles(Role.Author)
   async updateChapter(
     @Param('id') id: number,
     @Body() Chapter: Chapter,

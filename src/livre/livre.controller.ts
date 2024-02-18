@@ -30,6 +30,12 @@ export class LivreController {
   async getLivres(): Promise<Livre[]> {
     return this.livreService.findAll();
   }
+  @Get('byUser')
+  @UseGuards(AuthGuard)
+  async getLivresByUser(@Req() req: CustomRequest): Promise<Livre[]> {
+    const user = req.user;
+    return this.livreService.findByUser(user);
+  }
 
   @Get(':id')
   @UseGuards(AuthGuard)

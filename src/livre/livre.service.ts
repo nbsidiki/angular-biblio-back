@@ -26,6 +26,10 @@ export class LivreService {
     return this.livresRepository.findOneBy({ title });
   }
 
+  async findByUser(author: any): Promise<Livre[] | null> {
+    return this.livresRepository.findBy({ author });
+  }
+
   async create(livreData: Partial<Livre>, userId: any): Promise<Livre> {
     livreData.author = userId;
     const livre = this.livresRepository.create(livreData);

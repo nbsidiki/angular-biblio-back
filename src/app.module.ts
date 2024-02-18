@@ -16,6 +16,10 @@ import { AuthMiddleware } from './auth/auth.middleware';
 import { ChaptersModule } from './chapters/chapters.module';
 import { MulterModule } from '@nestjs/platform-express';
 
+import { UploadController } from './upload/upload.controller';
+import { UploadModule } from './upload/upload.module';
+import * as path from 'path';
+
 @Module({
   imports: [
     AuthModule,
@@ -35,11 +39,14 @@ import { MulterModule } from '@nestjs/platform-express';
     PagesModule,
     CategoriesModule,
     ChaptersModule,
+
     MulterModule.register({
-      dest: './images', // Répertoire de stockage des fichiers téléchargés
+      dest: path.join(__dirname, 'images'), // Répertoire de stockage des fichiers téléchargés
     }),
+
+    UploadModule,
   ],
-  controllers: [AppController, PagesController],
+  controllers: [AppController, PagesController, UploadController],
   providers: [AppService, LivreService, PagesService],
 })
 export class AppModule implements NestModule {
