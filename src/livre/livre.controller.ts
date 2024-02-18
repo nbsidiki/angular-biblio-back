@@ -34,7 +34,7 @@ export class LivreController {
   @UseGuards(AuthGuard)
   async getLivresByUser(@Req() req: CustomRequest): Promise<Livre[]> {
     const user = req.user;
-    return this.livreService.findByUser(user);
+    return this.livreService.findByUser(user.sub);
   }
 
   @Get(':id')
@@ -63,6 +63,7 @@ export class LivreController {
         HttpStatus.CONFLICT,
       );
     }
+    console.log(livre);
     return this.livreService.create(livre, user.sub);
   }
 

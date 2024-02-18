@@ -32,7 +32,7 @@ import * as path from 'path';
       username: 'biblio_tech_user',
       password: 'biblio_tech_password',
       database: 'biblio_tech_db',
-      entities: [User],
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
       autoLoadEntities: true,
     }),

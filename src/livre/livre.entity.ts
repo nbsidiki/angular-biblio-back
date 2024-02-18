@@ -20,14 +20,17 @@ export class Livre {
   @Column()
   title: string;
 
-  @ManyToOne(() => User, (user) => user.livres, { onDelete: 'CASCADE' })
+  @ManyToOne(() => User, (user) => user.livres, {
+    onDelete: 'CASCADE',
+    eager: true,
+  })
   @JoinColumn({ name: 'authorId' })
   author: User;
 
   @Column({ type: 'text', nullable: true })
   resume: string;
 
-  @Column({ type: 'text', nullable: true })
+  @Column({ nullable: true })
   image: string;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
@@ -43,16 +46,20 @@ export class Livre {
   @OneToMany(() => Page, (page) => page.livre, {
     cascade: true,
     nullable: true,
+    eager: true,
   })
   pages: Page[];
 
   @OneToMany(() => Chapter, (chapter) => chapter.livre, {
     cascade: true,
     nullable: true,
+    eager: true,
   })
   chapters: Chapter[];
 
-  @ManyToMany(() => Category)
+  @ManyToMany(() => Category, {
+    eager: true,
+  })
   @JoinTable()
   category: Category[];
 }
