@@ -13,9 +13,6 @@ export class Page {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  title: string;
-
   @Column({ nullable: true })
   contenu: string;
 
