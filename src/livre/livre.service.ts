@@ -22,21 +22,21 @@ export class LivreService {
 
   async findOne(id: number): Promise<Livre | null> {
     return this.livresRepository.findOne({
-      where: { id },
+      where: { id: id },
       relations: ['author', 'pages', 'chapters', 'category'],
     });
   }
 
   async findByTitle(title: string): Promise<Livre | null> {
     return this.livresRepository.findOne({
-      where: { title },
+      where: { title: title },
       relations: ['author', 'pages', 'chapters', 'category'],
     });
   }
 
   async findByUser(author: any): Promise<Livre[] | null> {
     return this.livresRepository.find({
-      where: { author },
+      where: { author: { id: author } },
       relations: ['author', 'pages', 'chapters', 'category'],
     });
   }
