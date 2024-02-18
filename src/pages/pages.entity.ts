@@ -35,7 +35,6 @@ export class Page {
 
   @ManyToOne(() => Chapter, (chapter) => chapter.pages, {
     onDelete: 'CASCADE',
-    eager: true,
   })
   @JoinColumn({ name: 'chapterId' })
   chapter: Chapter;
