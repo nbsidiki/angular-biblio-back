@@ -33,7 +33,10 @@ export class Page {
   @JoinColumn({ name: 'livreId' })
   livre: Livre;
 
-  @ManyToOne(() => Chapter, (chapter) => chapter.pages, { onDelete: 'CASCADE' })
+  @ManyToOne(() => Chapter, (chapter) => chapter.pages, {
+    onDelete: 'CASCADE',
+    eager: true,
+  })
   @JoinColumn({ name: 'chapterId' })
   chapter: Chapter;
 }
